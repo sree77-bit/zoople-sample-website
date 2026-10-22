@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f4f4;
+            color: #111;
+            overflow-x: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            width: 100%;
+            min-height: 40px;
+            padding: 8px 3%;
+            background: #222;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #83bdff;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            width: 100%;
+            min-height: 710px;
+            padding: 60px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 45px;
+            background: #f5f5f5;
+        }
+
+        .hero-content {
+            flex: 1 1 50%;
+            min-width: 0;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(32px, 3.2vw, 46px);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            max-width: 650px;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #087ff5;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .buy-btn:hover {
+            background: #0566c9;
+        }
+
+        .hero-image {
+            flex: 1 1 45%;
+            min-width: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 420px;
+            height: 305px;
+            object-fit: contain;
+            background: #ddd;
+            border-radius: 10px;
+        }
+
+        /* PRODUCTS SECTION */
+        .products-section {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            padding: 20px 4% 45px;
+            overflow: hidden;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .products {
+            display: grid;
+            width: 100%;
+            max-width: 100%;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .product-card {
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease,
+                        box-shadow 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-card img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: 165px;
+            object-fit: contain;
+            margin-bottom: 12px;
+        }
+
+        .product-card h3 {
+            font-size: 16px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .cart-button {
+            margin-top: auto;
+            padding: 8px 16px;
+            min-height: 34px;
+            border: none;
+            border-radius: 4px;
+            background: green;
+            color: white;
+            font-family: inherit;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .cart-button:hover {
+            background: darkgreen;
+        }
+
+        .cart-status {
+            min-height: 22px;
+            margin-top: 20px;
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            padding: 30px 20px 40px;
+            text-align: center;
+        }
+
+        .about h2 {
+            margin-bottom: 10px;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 22px 18px;
+            background: #222;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* TABLET */
+        @media (max-width: 900px) {
+            .hero {
+                min-height: 560px;
+                padding: 50px 5%;
+                gap: 28px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .products-section {
+                padding: 25px 4%;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 18px;
+            }
+
+            .product-card img {
+                height: 165px;
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                justify-content: center;
+                gap: 12px;
+                padding: 14px 12px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 55px 20px 40px;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .hero-content {
+                width: 100%;
+                flex: initial;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+                margin-bottom: 15px;
+            }
+
+            .hero-content p {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+
+            .hero-image {
+                width: 100%;
+                flex: initial;
+            }
+
+            .hero-image img {
+                width: 100%;
+                max-width: 360px;
+                height: 230px;
+            }
+
+            .products-section {
+                padding: 20px 14px 32px;
+            }
+
+            .section-heading {
+                font-size: 24px;
+                margin-bottom: 18px;
+            }
+
+            .products {
+                width: 100%;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .product-card {
+                width: 100%;
+                min-width: 0;
+                padding: 12px 9px 14px;
+            }
+
+            .product-card img {
+                width: 100%;
+                height: 120px;
+                margin-bottom: 10px;
+            }
+
+            .product-card h3 {
+                font-size: 14px;
+            }
+
+            .product-price {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+
+            .cart-button {
+                width: 100%;
+                max-width: 130px;
+                padding: 8px 7px;
+            }
+        }
+
+        /* VERY SMALL MOBILE */
+        @media (max-width: 360px) {
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card img {
+                height: 170px;
+            }
+        }
+
+        /* ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="#home" class="logo">TechStore</a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+                <h1>Smart Watch Pro</h1>
+
+                <p>
+                    Stay connected, track your fitness, and manage your daily
+                    tasks with the all-new Smart Watch Pro.
+                </p>
+
+                <a href="#products" class="buy-btn">Buy Now</a>
+            </div>
+
+            <div class="hero-image">
+                <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+                    alt="Smart Watch Pro"
+                >
+            </div>
+
+        </section>
+
+        <!-- PRODUCTS SECTION -->
+        <section class="products-section" id="products">
+
+            <h2 class="section-heading">Our Products</h2>
+
+            <div class="products">
+
+                <article class="product-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80"
+                        alt="Smart Watch"
+                        loading="lazy"
+                    >
+                    <h3>Smart Watch</h3>
+                    <p class="product-price">$99</p>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80"
+                        alt="Headphones"
+                        loading="lazy"
+                    >
+                    <h3>Headphones</h3>
+                    <p class="product-price">$79</p>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80"
+                        alt="Smart Phone"
+                        loading="lazy"
+                    >
+                    <h3>Smart Phone</h3>
+                    <p class="product-price">$499</p>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=400&q=80"
+                        alt="iPhone"
+                        loading="lazy"
+                    >
+                    <h3>IPhone</h3>
+                    <p class="product-price">$599</p>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=400&q=80"
+                        alt="iPhone"
+                        loading="lazy"
+                    >
+                    <h3>IPhone</h3>
+                    <p class="product-price">$599</p>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                </article>
+
+                <article class="product-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1591337676887-a217a6970a8a?auto=format&fit=crop&w=400&q=80"
+                        alt="Orange Smartphone"
+                        loading="lazy"
+                    >
+                    <h3>IPhone</h3>
+                    <p class="product-price">$599</p>
+                    <button class="cart-button" type="button">Add to Cart</button>
+                </article>
+
+            </div>
+
+            <p class="cart-status" id="cart-status" role="status" aria-live="polite">
+                Cart: 0 items
+            </p>
+
+        </section>
+
+        
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <p>© 2026 TechStore. All rights reserved.</p>
+    </footer>
+
+    <!-- CART COUNTER -->
+    <script>
+        const cartButtons = document.querySelectorAll(".cart-button");
+        const cartStatus = document.getElementById("cart-status");
+
+        let cartCount = 0;
+
+        cartButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                cartCount++;
+
+                cartStatus.textContent =
+                    `Cart: ${cartCount} item${cartCount === 1 ? "" : "s"}`;
+
+                button.textContent = "Added ✓";
+
+                window.setTimeout(() => {
+                    button.textContent = "Add to Cart";
+                }, 900);
+            });
+        });
+    </script>
+
+</body>
+</html>
